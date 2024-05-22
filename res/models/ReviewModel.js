@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const CartSchema = new mongoose.Schema(
+const ReviewSchema = new mongoose.Schema(
   {
     productID: {
       type: mongoose.Schema.Types.ObjectId,
@@ -12,20 +12,11 @@ const CartSchema = new mongoose.Schema(
       ref: "users",
       required: true,
     },
-    color: {
+    des: {
       type: "string",
-      required: true,
     },
-    price: {
+    rating: {
       type: Number,
-      required: true,
-    },
-    qty: {
-      type: Number,
-      required: true,
-    },
-    size: {
-      type: "string",
       required: true,
     },
   },
@@ -35,5 +26,6 @@ const CartSchema = new mongoose.Schema(
   }
 );
 
-const CartModel = mongoose.model("carts", CartSchema);
-export default CartModel;
+const ReviewModel = mongoose.model("reviews", ReviewSchema);
+
+export default ReviewModel;
