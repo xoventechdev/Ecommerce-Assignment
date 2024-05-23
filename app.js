@@ -6,6 +6,7 @@ import helmet from "helmet";
 import rateLimiter from "express-rate-limit";
 import router from "./res/routes/WebAPI.js";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ const app = express();
 app.use(cors());
 app.use(helmet());
 app.use(hpp());
+app.use(cookieParser());
 
 app.use(express.json());
 

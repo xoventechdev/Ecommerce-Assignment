@@ -1,6 +1,8 @@
 import UserModel from "../models/UserModel.js";
 import SendMail from "../utility/EmailSender.js";
 import { EncodeToken } from "../utility/AuthHelper.js";
+import ProfileModel from "../models/ProfileModel.js";
+import BrandModel from "../models/BrandModel.js";
 
 export const OTPRequest = async (req) => {
   try {
@@ -46,6 +48,51 @@ export const OTPVerified = async (req) => {
     return {
       status: "error",
       response: "Failed to verified your OTP. Please, try again.",
+    };
+  }
+};
+
+export const SaveUserProfile = async (req) => {
+  try {
+    const user_id = req.user_id;
+    const userData = req.body;
+    const user = await ProfileModel.updateOne(
+      { userID: user_id },
+      { $set: userData },
+      { upsert: true }
+    );
+    if (user.modifiedCount === 1) {
+      return {
+        status: "success",
+        response: "User profile updated successfully",
+      };
+    }
+    return { status: "success", response: "User profile created successfully" };
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "error",
+      response: "Failed to save user profile. Please, try again",
+    };
+  }
+};
+
+export const ReadUserProfile = async (req) => {
+  try {
+    const user_id = req.user_id;
+    const user = await ProfileModel.find();
+    if (user.length === 0) {
+      return {
+        status: "success",
+        response: "User profile not found. Please, update your profile.",
+      };
+    }
+    return { status: "success", response: user };
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "error",
+      response: "Failed to read user profile. Please, try again",
     };
   }
 };
