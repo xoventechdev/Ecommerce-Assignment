@@ -41,7 +41,7 @@ const ProductDetailsSchema = new mongoose.Schema(
 );
 
 const ProductDetailsModel = mongoose.model(
-  "productpetails",
+  "productdetails",
   ProductDetailsSchema
 );
 export default ProductDetailsModel;

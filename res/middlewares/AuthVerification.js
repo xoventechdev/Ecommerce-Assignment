@@ -8,14 +8,16 @@ export const AuthVerified = (req, res, next) => {
 
   if (!token) {
     return res.status(401).json({
-      message: "Unauthorized. Token is required.",
+      status: 'warning',
+      message: "You are unauthorized. Please, try with valid token.",
     });
   }
 
   const decoded = DecodeToken(token);
   if (!decoded) {
     return res.status(401).json({
-      message: "Unauthorized. Token is invalid.",
+      status: 'warning',
+      message: "You are unauthorized. Please, try with valid token.",
     });
   }
 

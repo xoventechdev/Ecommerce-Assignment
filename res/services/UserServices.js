@@ -80,14 +80,14 @@ export const SaveUserProfile = async (req) => {
 export const ReadUserProfile = async (req) => {
   try {
     const user_id = req.user_id;
-    const user = await ProfileModel.find();
+    const user = await ProfileModel.find({ userID: user_id });
     if (user.length === 0) {
       return {
         status: "success",
         response: "User profile not found. Please, update your profile.",
       };
     }
-    return { status: "success", response: user };
+    return { status: "success", response: user[0] };
   } catch (error) {
     console.log(error.message);
     return {

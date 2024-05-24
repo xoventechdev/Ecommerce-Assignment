@@ -7,21 +7,58 @@ import {
   UserOTPVerified,
 } from "../controller/UserController.js";
 import { AuthVerified } from "../middlewares/AuthVerification.js";
-import { ProductBrandList } from "../controller/ProductController.js";
+import {
+  ProductBrandList,
+  ProductCategoryList,
+  ProductDetailsByID,
+  ProductListByBrand,
+  ProductListByCategory,
+  ProductListByKeyword,
+  ProductListByRemark,
+  ProductListBySmiler,
+  ProductReviewListByID,
+  ProductSliderList,
+} from "../controller/ProductController.js";
+import {
+  ProductWishList,
+  RemoveWishListForProduct,
+  SaveWishListForProduct,
+} from "../controller/WishController.js";
+import {
+  ProductCartList,
+  RemoveCartListForProduct,
+  SaveCartListForProduct,
+} from "../controller/CartController.js";
 
 const router = Router();
 
 // Product Related API
 router.get("/ProductBrandList", AuthVerified, ProductBrandList);
-router.get("/ProductCategoryList");
-router.get("/ProductSliderList");
-router.get("/ProductListByBrand/:BrandID");
-router.get("/ProductListByCategory/:CategoryID");
-router.get("/ProductListBySmilier/:CategoryID");
-router.get("/ProductListByKeyword/:Keyword");
-router.get("/ProductListByRemark/:Remark");
-router.get("/ProductDetails/:ProductID");
-router.get("/ProductReviewList/:ProductID");
+router.get("/ProductCategoryList", AuthVerified, ProductCategoryList);
+router.get("/ProductSliderList", AuthVerified, ProductSliderList);
+router.get("/ProductListByBrand/:BrandID", AuthVerified, ProductListByBrand);
+router.get(
+  "/ProductListByCategory/:CategoryID",
+  AuthVerified,
+  ProductListByCategory
+);
+router.get(
+  "/ProductListBySmilier/:CategoryID",
+  AuthVerified,
+  ProductListBySmiler
+);
+router.get(
+  "/ProductListByKeyword/:Keyword",
+  AuthVerified,
+  ProductListByKeyword
+);
+router.get("/ProductListByRemark/:Remark", AuthVerified, ProductListByRemark);
+router.get("/ProductDetails/:ProductID", AuthVerified, ProductDetailsByID);
+router.get(
+  "/ProductReviewList/:ProductID",
+  AuthVerified,
+  ProductReviewListByID
+);
 
 // User Related API
 router.get("/UserOTP/:email", UserOTPRequest);
@@ -32,13 +69,13 @@ router.post("/UpdateProfile", AuthVerified, SaveProfile);
 router.get("/ReadProfile", AuthVerified, ReadProfile);
 
 // Wish List Related API
-router.post("/SaveWishList");
-router.post("/RemoveWishList");
-router.get("/WishList");
+router.post("/SaveWishList", AuthVerified, SaveWishListForProduct);
+router.post("/RemoveWishList", AuthVerified, RemoveWishListForProduct);
+router.get("/WishList", AuthVerified, ProductWishList);
 
 // Cart List Related API
-router.post("/SaveCartList");
-router.post("/RemoveCartList");
-router.get("/CartList");
+router.post("/SaveCartList", AuthVerified, SaveCartListForProduct);
+router.post("/RemoveCartList", AuthVerified, RemoveCartListForProduct);
+router.get("/CartList", AuthVerified, ProductCartList);
 
 export default router;
