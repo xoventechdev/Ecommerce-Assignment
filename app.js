@@ -38,7 +38,11 @@ mongoose
 app.use("/api/v1", router);
 
 app.get("/", (req, res) => {
-  res.json({status: 'success', response: {'Welcome to the API services of an e-commerce project for the Ostad platform.'}});
+  res.json({
+    status: "success",
+    response:
+      "Welcome to the API services of an e-commerce project for the Ostad platform.",
+  });
 });
 
 export default app;
