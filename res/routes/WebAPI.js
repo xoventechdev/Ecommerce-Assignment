@@ -63,7 +63,7 @@ router.get(
 // User Related API
 router.get("/UserOTP/:email", UserOTPRequest);
 router.get("/VerifyLogin/:email/:otp", UserOTPVerified);
-router.get("/UserLogout", UserLogout);
+router.get("/UserLogout", AuthVerified, UserLogout);
 router.post("/CreateProfile", AuthVerified, SaveProfile);
 router.post("/UpdateProfile", AuthVerified, SaveProfile);
 router.get("/ReadProfile", AuthVerified, ReadProfile);
